@@ -1,0 +1,45 @@
+.details-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.details-header {
+  display: flex;
+  align-items: center; /* Center items vertically */
+  margin-bottom: 20px;
+}
+
+.details-image {
+  flex-shrink: 0;
+  width: 80px; /* Adjust size as needed */
+  height: 80px; /* Adjust size as needed */
+  margin-right: 20px;
+}
+
+.details-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.details-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+  flex: 1; /* Allow title to take available space */
+}
+
+.details-fields p {
+  margin: 10px 0;
+}
+
+.details-fields a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.details-fields a:hover {
+  text-decoration: underline;
+}

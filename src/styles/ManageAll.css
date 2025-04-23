@@ -1,0 +1,64 @@
+.news-card {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 10px !important;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 10px !important;
+  transition: transform 0.2s ease-in-out !important;
+  background-color: #ffffff !important;
+}
+
+body {
+  background-color: rgb(209, 209, 209) !important;
+}
+
+.news-image {
+  width: 80px !important;
+  height: 80px !important;
+  object-fit: cover !important;
+  border-radius: 10px !important;
+  margin-right: 15px !important;
+}
+
+.news-content {
+  flex: 1 !important;
+  margin-right: 15px !important;
+}
+
+.news-title {
+  font-size: 16px !important;
+  font-weight: bold !important;
+  margin-bottom: 5px !important;
+}
+
+.news-details {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.news-role {
+  font-size: 14px !important;
+  color: #1500ff !important;
+}
+
+.news-date {
+  font-size: 12px !important;
+  color: #ff0000 !important;
+}
+
+.bookmark-button {
+  white-space: nowrap !important;
+  font-size: 12px !important;
+  padding: 6px 12px !important;
+}
+
+.bookmark-button:hover {
+  background-color: #000000 !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+.news-card:hover {
+  transform: translateY(-5px) !important;
+}
