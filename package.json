@@ -19,6 +19,7 @@
     "crypto": "^1.0.1",
     "crypto-browserify": "^3.12.1",
     "firebase": "^11.6.0",
+    "gh-pages": "^6.3.0",
     "http-proxy-middleware": "^3.0.5",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.9",
@@ -35,7 +36,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
