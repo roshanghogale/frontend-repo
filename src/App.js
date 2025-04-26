@@ -37,7 +37,6 @@ function App() {
   const [body, setBody] = useState("");
   const [lastDate, setLastDate] = useState("");
   const [applicationLink, setApplicationLink] = useState("");
-  const [iconTitle, setIconTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [iconUrl, setIconUrl] = useState("");
   const [pdfUrl, setPdfUrl] = useState("");
@@ -70,6 +69,21 @@ function App() {
     secondaryCategory: "",
     subCategory: "",
   });
+
+  const categorySubcategoryMap = {
+    bank: [
+      { value: "private-bank", label: "Private Bank" },
+      { value: "govt-bank", label: "Govt. Bank" },
+    ],
+    govt: [
+      { value: "maha-govt", label: "Maha Govt." },
+      { value: "central-govt", label: "Central Govt." },
+    ],
+    private: [
+      { value: "work-home", label: "Work Home" },
+      { value: "regular-job", label: "Regular Job" },
+    ],
+  };
 
   const handlePushNotification = async (e) => {
     e.preventDefault();
@@ -305,6 +319,7 @@ function App() {
     setCategories((prev) => ({
       ...prev,
       [name]: value,
+      ...(name === "mainCategory" ? { subCategory: "" } : {}),
     }));
   };
 
@@ -415,7 +430,7 @@ function App() {
                     </FloatingLabel>
                   </div>
 
-                  {/* Row 2: Salary, Main Category, Secondary Category, Sub Category */}
+                  {/* Row 2: Salary, Main Category, Sub Category, Secondary Category */}
                   <div className="col-md-3 mb-4">
                     <FloatingLabel
                       controlId="floatingSalary"
@@ -442,10 +457,32 @@ function App() {
                         onChange={handleCategoryChange}
                       >
                         <option value="">Select Main Category</option>
-                        <option value="Kendr">Kendr Sarkar</option>
-                        <option value="bank">Bank</option>
-                        <option value="Maharashtra">Maharashtra</option>
-                        <option value="Local">Local</option>
+                        <option value="govt">Government Job</option>
+                        <option value="bank">Bank Job</option>
+                        <option value="private">Private Job</option>
+                      </Form.Select>
+                    </FloatingLabel>
+                  </div>
+                  <div className="col-md-3 mb-4">
+                    <FloatingLabel
+                      controlId="floatingSelectSub"
+                      label="Sub Category"
+                    >
+                      <Form.Select
+                        name="subCategory"
+                        value={categories.subCategory}
+                        onChange={handleCategoryChange}
+                        disabled={!categories.mainCategory}
+                      >
+                        <option value="">Select Sub Category</option>
+                        {categories.mainCategory &&
+                          categorySubcategoryMap[categories.mainCategory]?.map(
+                            (subCat) => (
+                              <option key={subCat.value} value={subCat.value}>
+                                {subCat.label}
+                              </option>
+                            )
+                          )}
                       </Form.Select>
                     </FloatingLabel>
                   </div>
@@ -571,25 +608,8 @@ function App() {
                       </Form.Select>
                     </FloatingLabel>
                   </div>
-                  <div className="col-md-3 mb-4">
-                    <FloatingLabel
-                      controlId="floatingSelectSub"
-                      label="Sub Category"
-                    >
-                      <Form.Select
-                        name="subCategory"
-                        value={categories.subCategory}
-                        onChange={handleCategoryChange}
-                      >
-                        <option value="">Select Category</option>
-                        <option value="job">Job Update</option>
-                        <option value="result">Results</option>
-                        <option value="hall-ticket">Hall Ticket</option>
-                      </Form.Select>
-                    </FloatingLabel>
-                  </div>
 
-                  {/* Row 3: Last Date, Application Link, Extra Link Title, Extra Link URL, Note */}
+                  {/* Row 3: Last Date, Application Link, Extra Link Title, Extra Link URL */}
                   <div className="col-md-3 mb-4">
                     <FloatingLabel
                       controlId="floatingLastDate"
@@ -778,8 +798,8 @@ function App() {
                     </label>
                   </div>
 
-                  {/* Row 5: Select Selection PDF, Note, Notification Checkbox, (Empty) */}
-                  <div className="col-md-3 mb-2">
+                  {/* Row 5: Select Selection PDF, Note, Notification Checkbox */}
+                  <div className="col-md-4 mb-2">
                     <label className="w-100">
                       <input
                         type="file"
@@ -818,7 +838,7 @@ function App() {
                       </Button>
                     </label>
                   </div>
-                  <div className="col-md-3 mb-4">
+                  <div className="col-md-4 mb-4">
                     <FloatingLabel
                       controlId="floatingNote"
                       label="Note"
@@ -832,7 +852,7 @@ function App() {
                       />
                     </FloatingLabel>
                   </div>
-                  <div className="col-md-3 mb-4 d-flex align-items-center custom-checkbox">
+                  <div className="col-md-4 mb-4 d-flex align-items-center custom-checkbox">
                     <Form.Check
                       type="checkbox"
                       id="notification"
@@ -844,7 +864,6 @@ function App() {
                       style={{ display: "flex", alignItems: "center" }}
                     />
                   </div>
-                  <div className="col-md-3 mb-4"></div>
 
                   {/* Row 6: Send Notification (spanning full width) */}
                   <div className="col-12 mb-4">
